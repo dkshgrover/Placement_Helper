@@ -21,18 +21,34 @@ public class changePass extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String user = request.getParameter("as");
 		String oldPass = request.getParameter("oldP");
 		String newPass = request.getParameter("newP");
+		String query = "";
+		if(user.equals("student")) {
+			query = "update students set s_pass='"+newPass+"' where s_pass='"+oldPass+"'";
+		}else {
+			query = "update college_administrator set pass='"+newPass+"' where pass='"+oldPass+"'";
+		}
 		try {
 			Connection con = ConnectionProvider.provideConnection();
-			String qry = "update students set s_pass='"+newPass+"' where s_pass='"+oldPass+"'";
+			
 			Statement st = con.createStatement();
-			int rows = st.executeUpdate(qry);
-			if(rows == 1) {
-				response.sendRedirect("assets/index.jsp?passchanged=Password Changed**");
+			int rows = st.executeUpdate(query);
+			if(user.equals("student")) {
+				if(rows == 1) {
+					response.sendRedirect("assets/index.jsp?passchanged=Password Changed**");
+				}else {
+					response.sendRedirect("assets/index.jsp?error=Wrong password entered**");
+				}
 			}else {
-				response.sendRedirect("assets/index.jsp?error=Wrong password entered**");
+				if(rows == 1) {
+					response.sendRedirect("admin/index.jsp");
+				}else {
+					response.sendRedirect("admin/index.jsp?error=Wrong password entered**");
+				}
 			}
+			
 		}catch(Exception e) {
 			
 		}

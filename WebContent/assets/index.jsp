@@ -52,8 +52,6 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 
 	}
 </script>
-
-
 <title>Placement Helper</title>
 
 </head>
@@ -79,7 +77,11 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 						out.print("<a class='nav-text' class='nav-link' href='../chooseUser.jsp'>Login/Register</a>");
 					} else {
 						ResultSet rs = (ResultSet) session.getAttribute("resultSet");
-						if (rs.getString(2) == null) {
+						if (rs.getString(33).equals("pending")) {
+							session.removeAttribute("uname");
+							session.removeAttribute("resultSet");
+							response.sendRedirect("../register.jsp?loginAs=student&status=Request not accepted yet**");
+						}else if(rs.getString(33).equals("accepted") && rs.getString(2) == null){
 							response.sendRedirect("../iPortfolio/form.jsp");
 						} else {
 							out.print("<div class='dropdown'>");
@@ -88,9 +90,8 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 									+ rs.getString(2) + "</button>");
 							out.print("<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>");
 							out.print("<a class='dropdown-item' href='../iPortfolio/index.jsp'>Dashboard</a>");
-							out.print(
-							"<a style='cursor: pointer;' class='dropdown-item' data-toggle='modal' data-target='#exampleModal'>Change Password</a>");
-							out.print("<a class='dropdown-item' href='../logoutServlet'>Log-Out</a>");
+							out.print("<a style='cursor: pointer;' class='dropdown-item' data-toggle='modal' data-target='#exampleModal'>Change Password</a>");
+							out.print("<a class='dropdown-item' href='../logoutServlet?as=student'>Log-Out</a>");
 							out.print("</div>");
 							out.print("</div>");
 						}
@@ -99,6 +100,7 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 				</div>
 			</div>
 		</div>
+		<div id="alert" style="width: 100%;position: fixed;margin-top: 150px;"> </div>
 	</nav>
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -114,7 +116,7 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 				</div>
 				<div class="modal-body">
 					<div class="container formChange">
-						<form action="../changePass" method="post">
+						<form action="../changePass?as=student" method="post">
 							<div class="input-group mb-3">
 
 								<input type="password" required class="form-control"
@@ -136,7 +138,7 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 							</div>
 							<div class="modal-footer">
 
-								<input type="submit" id="passwordBtn" value="Save changes"
+								<input type="submit" id="sub" value="Save changes"
 									class="btn btn-primary">
 							</div>
 						</form>
@@ -147,10 +149,6 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 			</div>
 		</div>
 	</div>
-
-	<p style="margin-top: 8%; margin-left: 5%; color: red;"><%=(request.getParameter("loginAgain") == null) ? "" : request.getParameter("loginAgain")%></p>
-	<p style="margin-top: 8%; margin-left: 5%; color: red;"><%=(request.getParameter("passchanged") == null) ? "" : request.getParameter("passchanged")%></p>
-	<p style="margin-top: 8%; margin-left: 5%; color: red;"><%=(request.getParameter("error") == null) ? "" : request.getParameter("error")%></p>
 	<h1 class="tagline">
 		Open Minds, <br> Creating <br> Future
 	</h1>
@@ -802,6 +800,22 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 
 	</div>
 </body>
+<script>
+  var alert = document.getElementById('alert');
+  var submit = document.getElementById('sub');
+  console.log(submit);
+  
+  submit.addEventListener('click',(e)=>{
+    alert.innerHTML=`<div class="alert alert-success" role="alert">
+        Password Changed!
+      </div>`;
+      setTimeout(() => {
+        console.log('done');
+
+        alert.innerHTML=``;
+      }, 300000);
+  })
+</script>
 <script>
   var passwordBtn = document.getElementById('passwordBtn');
   var modalBody = document.getElementsByClassName('modal-body');

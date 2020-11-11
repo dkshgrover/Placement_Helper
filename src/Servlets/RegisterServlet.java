@@ -68,32 +68,41 @@ public class RegisterServlet extends HttpServlet {
 					request.getRequestDispatcher("register.jsp?loginAs=student").forward(request, response);
 				}else {
 					String qry = "insert into projects(s_id) values(?)";
-					String query = "insert into students (s_id,college_id,s_email,s_pass) values(?,?,?,?)";
+					String query = "insert into students (s_id,college_id,s_email,s_pass,status) values(?,?,?,?,?)";
+					String qry2 = "update college_administrator set pendingReq=pendingReq+1 where cid="+college_id;
 					PreparedStatement st = con.prepareStatement(query);
 					PreparedStatement st2 = con.prepareStatement(qry);
+					Statement st3 = con.createStatement();
+					st3.executeUpdate(qry2);
 					st2.setString(1, email);
 					st.setInt(1, uname);
 					st.setInt(2, college_id);
 					st.setString(3, email);
 					st.setString(4, pass);
+					st.setString(5, "pending");
 					int rows = st.executeUpdate();
 					st2.executeUpdate();
-					System.out.println(rows + " Rows Updated");
+					//System.out.println(rows + " Rows Updated");
 					request.setAttribute("registered", "You have been registered **");
 					RequestDispatcher rd = request.getRequestDispatcher("register.jsp?loginAs=student");
 					rd.forward(request, response);
 				}
-			} else {
+			} 
+			else if(registerAs.equalsIgnoreCase("college_administrator")) {
 				String query = "insert into college_administrator (cid,c_email,pass) values(?,?,?)";
 				PreparedStatement st = con.prepareStatement(query);
 				st.setInt(1, uname);
 				st.setString(2, email);
 				st.setString(3, pass);
 				int rows = st.executeUpdate();
-				System.out.println(rows + " Rows Updated");
+//				System.out.println(rows + " Rows Updated");
 				request.setAttribute("registered", "You have been registered **");
 				RequestDispatcher rd = request.getRequestDispatcher("register.jsp?loginAs=college_administrator");
 				rd.forward(request, response);
+			}
+			else {
+				request.setAttribute("error", "Wrong url, Choose again**");
+				request.getRequestDispatcher("chooseUser.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 

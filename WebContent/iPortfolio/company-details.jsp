@@ -7,15 +7,15 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0
 response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 <%
-	if (session.getAttribute("uname") == null) {
-	response.sendRedirect("../register.jsp?loginAs=student&loginFirst=Please Login First**");
+if (session.getAttribute("uname") == null) {
+	request.getRequestDispatcher("../servlet1?loginFirst=You are not logged in**").forward(request, response);
 }
 %>
 <%
 	ResultSet rs = (ResultSet) session.getAttribute("resultSet");
 ResultSet rs2 = (ResultSet) session.getAttribute("resultSet2");
 ResultSet rs3 = (ResultSet) session.getAttribute("resultSet3");
-String cdesc = rs2.getString(14);
+String cdesc = rs2.getString(13);
 String[] cdescr = cdesc.split("\\r?\\n");
 String process = rs2.getString(7);
 String[] rProcess = process.split(",");
@@ -151,9 +151,9 @@ th {
 
 					<div class="owl-carousel portfolio-details-carousel">
 						<%
-							out.print("<img src='assets/img/Companies/" + rs2.getString(16) + "' class='img-fluid' alt=''>");
+							out.print("<img src='assets/img/Companies/" + rs2.getString(15) + "' class='img-fluid' alt=''>");
+						out.print("<img src='assets/img/Companies/" + rs2.getString(16) + "' class='img-fluid' alt=''>");
 						out.print("<img src='assets/img/Companies/" + rs2.getString(17) + "' class='img-fluid' alt=''>");
-						out.print("<img src='assets/img/Companies/" + rs2.getString(18) + "' class='img-fluid' alt=''>");
 						%>
 					</div>
 
@@ -164,7 +164,7 @@ th {
 						<ul>
 							<li><strong>Category</strong>: <%=rs2.getString(3)%></li>
 							<li><strong>Founder</strong>: Mr. <%=rs2.getString(4)%></li>
-							<li><strong>Package offered</strong>: <%=rs2.getString(11)%></li>
+							<li><strong>Package offered</strong>: <%=rs2.getString(10)%></li>
 							<%
 								out.print("<li><strong>Website</strong>: <a href='" + rs2.getString(6) + "' target='_blank'>" + rs2.getString(6)
 									+ "</a></li>");
@@ -195,16 +195,12 @@ th {
 								<td><%=rs2.getInt(8)%></td>
 							</tr>
 							<tr>
-								<th scope="row">Batch</th>
-								<td><%=rs2.getInt(9)%></td>
-							</tr>
-							<tr>
 								<th scope="row">Test Platform</th>
-								<td><%=rs2.getString(10)%></td>
+								<td><%=rs2.getString(9)%></td>
 							</tr>
 							<tr>
 								<th scope="row">Visiting Date</th>
-								<td>10-July-2022</td>
+								<td><%=rs2.getString(14)%></td>
 							</tr>
 							<tr>
 								<th scope="row">Company type</th>
@@ -241,121 +237,226 @@ th {
 					<h4 class="text-center" style="margin-left: -14%;">Aptitude</h4>
 					<br>
 					<div class="row">
-						<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-							<h4 class="title">
-								<a href="#">2015 Questions</a>
-							</h4>
-						</div>
-						<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-							<h4 class="title">
-								<a href="#">2016 Questions</a>
-							</h4>
-						</div>
-						<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-							<h4 class="title">
-								<a href="#">2017 Questions</a>
-							</h4>
-						</div>
+						<%
+							if(rs2.getString(19) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(19)+"'>2015 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
+						<%
+							if(rs2.getString(20) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(20)+"'>2016 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
+
+						<%
+							if(rs2.getString(21) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(21)+"'>2017 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
 					</div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 				<div class="row">
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<h4 class="title">
-							<a href="#">2018 Questions</a>
-						</h4>
-					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<h4 class="title">
-							<a href="#">2019 Questions</a>
-						</h4>
-					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<h4 class="title">
-							<a href="#">2020 Questions</a>
-						</h4>
-					</div>
+					<%
+							if(rs2.getString(22) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(22)+"'>2018 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
+						<%
+							if(rs2.getString(23) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(23)+"'>2019 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
 				</div>
 				<div class="portfolio-description" id="material">
 					<h4 class="text-center" style="margin-left: -14%;">Verbal</h4>
 					<br>
 					<div class="row">
-						<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-							<h4 class="title">
-								<a href="#">2015 Questions</a>
-							</h4>
-						</div>
-						<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-							<h4 class="title">
-								<a href="#">2016 Questions</a>
-							</h4>
-						</div>
-						<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-							<h4 class="title">
-								<a href="#">2017 Questions</a>
-							</h4>
-						</div>
+						<%
+							if(rs2.getString(24) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(24)+"'>2015 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
+						<%
+							if(rs2.getString(25) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(25)+"'>2016 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
+
+						<%
+							if(rs2.getString(26) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(26)+"'>2017 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
 					</div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 				<div class="row">
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<h4 class="title">
-							<a href="#">2018 Questions</a>
-						</h4>
-					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<h4 class="title">
-							<a href="#">2019 Questions</a>
-						</h4>
-					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<h4 class="title">
-							<a href="#">2020 Questions</a>
-						</h4>
-					</div>
+					<%
+							if(rs2.getString(27) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(27)+"'>2018 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
+						<%
+							if(rs2.getString(28) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(28)+"'>2019 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
 				</div>
 				<div class="portfolio-description" id="material">
 					<h4 class="text-center" style="margin-left: -14%;">Technical</h4>
 					<br>
 					<div class="row">
-						<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-							<h4 class="title">
-								<a href="#">2015 Questions</a>
-							</h4>
-						</div>
-						<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-							<h4 class="title">
-								<a href="#">2016 Questions</a>
-							</h4>
-						</div>
-						<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-							<h4 class="title">
-								<a href="#">2017 Questions</a>
-							</h4>
-						</div>
+						<%
+							if(rs2.getString(29) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(29)+"'>2015 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
+						<%
+							if(rs2.getString(30) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(30)+"'>2016 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
+
+						<%
+							if(rs2.getString(31) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(31)+"'>2017 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
 					</div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 				<div class="row">
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<h4 class="title">
-							<a href="#">2018 Questions</a>
-						</h4>
-					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<h4 class="title">
-							<a href="#">2019 Questions</a>
-						</h4>
-					</div>
-					<div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-						<h4 class="title">
-							<a href="#">2020 Questions</a>
-						</h4>
-					</div>
+					<%
+							if(rs2.getString(32) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(32)+"'>2018 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
+						<%
+							if(rs2.getString(33) != null){
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+									out.print("<h4 class='title'>");
+										out.print("<a href='../downloadMaterial?fileName="+rs2.getString(33)+"'>2019 Questions</a>");
+									out.print("</h4></div>");
+							}else{
+								out.print("<div class='col-lg-4 col-md-6 icon-box' data-aos='fade-up'>");
+								out.print("<h4 class='title'>");
+									out.print("<a href='#'>No Data Exists</a>");
+								out.print("</h4></div>");
+							}
+						%>
 				</div>
 				<div class="portfolio-description" id="contact">
 					<h2>
@@ -369,7 +470,7 @@ th {
 
 								</div>
 								<p class="text-center mt-3">
-									<%=rs2.getString(19)%>
+									<%=rs2.getString(18)%>
 								</p>
 							</div>
 							<div class="col-sm-4 col-lg-4 col-md-4">
@@ -378,7 +479,7 @@ th {
 
 								</div>
 								<!-- <img src="./assets/img/Group 6call.svg" id="call" alt="" srcset=""> -->
-								<p class="text-center mt-3"><%=rs2.getString(12)%></p>
+								<p class="text-center mt-3"><%=rs2.getString(11)%></p>
 							</div>
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="d-flex justify-content-center">
@@ -387,7 +488,7 @@ th {
 
 								</div>
 								<!-- <img src="./assets/img/clarity_envelope-linemsg.svg" id="msg" alt="" srcset=""> -->
-								<p class="text-center mt-3"><%=rs2.getString(13)%></p>
+								<p class="text-center mt-3"><%=rs2.getString(12)%></p>
 							</div>
 						</div>
 					</div>

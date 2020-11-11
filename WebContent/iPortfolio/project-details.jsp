@@ -8,7 +8,7 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 <%
 	if (session.getAttribute("uname") == null) {
-	response.sendRedirect("../register.jsp?loginAs=student&loginFirst=Please Login First**");
+	request.getRequestDispatcher("../servlet1?loginFirst=You are not logged in**").forward(request, response);
 }
 %>
 <%

@@ -10,7 +10,7 @@ public class CheckLoginCollege_Admin {
 	public static ResultSet checkLogin(LoginBean loginbean) throws Exception{
 		String uname = loginbean.getUname();
 		String pass = loginbean.getPass();
-		String query = "select * from college_administrator where email_id='" + uname + "' and password='" + pass + "'";
+		String query = "select * from college_administrator where c_email='" + uname + "' and pass='" + pass + "'";
 		Connection con = ConnectionProvider.provideConnection();
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);

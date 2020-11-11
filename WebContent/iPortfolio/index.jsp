@@ -9,7 +9,7 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 <%
 	String[] pdescr1 = null;
-String[] pdescr_2 = null;
+	String[] pdescr_2 = null;
 if (session.getAttribute("uname") == null) {
 	request.getRequestDispatcher("../servlet1?loginFirst=You are not logged in**").forward(request, response);
 }
@@ -55,11 +55,11 @@ if (month == 11) {
 if (month == 12) {
 	monthS = "December";
 }
-String pdescr = rs.getString(37);
+String pdescr = rs.getString(38);
 if (pdescr != null) {
 	pdescr1 = pdescr.split("[.]");
 }
-String pdescr2 = rs.getString(41);
+String pdescr2 = rs.getString(42);
 if (pdescr2 != null) {
 	pdescr_2 = pdescr2.split("[.]");
 }
@@ -71,7 +71,7 @@ if (pdescr2 != null) {
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Portfolio</title>
+<title>Dashboard</title>
 <meta content="" name="description">
 <meta content="" name="keywords">
 <style>
@@ -79,7 +79,7 @@ if (pdescr2 != null) {
 	margin-top: -17px;
 	width: 100%;
 	height: 100vh;
-	background: url("../getImage2?email=<%=rs.getString(9)%>") top center;
+	background: url("../getImage2?email=<%=rs.getString(9)%>") black top center;
 	background-size: cover;
 }
 </style>
@@ -155,14 +155,14 @@ if (pdescr2 != null) {
 								out.print(
 									"<a style='cursor: pointer;' class='dropdown-item' data-toggle='modal' data-target='#exampleModal1'>Add Project</a>");
 							%>
-							<a class="dropdown-item" href="../logoutServlet">Log-Out</a>
+							<a class="dropdown-item" href="../logoutServlet?as=student">Log-Out</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</nav>
-<!-- Modal 2    -->
+	<!-- Modal 2    -->
 	<div class="modal fade" id="exampleModal1" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -176,7 +176,16 @@ if (pdescr2 != null) {
 				</div>
 				<div class="modal-body">
 					<div class="container formProject">
-						<form action="../addProject?pno=1" method="post">
+						<form action="../addProject" method="post">
+							<div class="form-group">
+								<label for="pno">Project Number</label>
+								<select name="pno" id="pno" class="form-control" required>
+									<option selected disabled>Choose..</option>
+									<option value="1">Project 1</option>
+									<option value="2">Project 2</option>
+								</select>
+							
+							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1">Project Name</label> <input
 									type="text" name="pname" class="form-control"
@@ -199,17 +208,12 @@ if (pdescr2 != null) {
 								<label for="exampleFormControlTextarea1">Project Details</label>
 								<textarea name="pdescr" class="form-control" rows="3"></textarea>
 							</div>
-
-
-							<button type="submit" id="projectBtn" class="btn btn-primary">
-								<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add
-								Second
-							</button>
-							<br><br>
 							<div class="modal-footer">
 
-								<input type="submit" id="passwordBtn" value="Save changes"
+								<input type="submit" id="sub" value="Save changes"
 									class="btn btn-primary">
+							<div id="alert" style="width: 30%;position: fixed;margin-top: 5%;"> </div>
+									
 							</div>
 						</form>
 					</div>
@@ -280,7 +284,7 @@ if (pdescr2 != null) {
 			%>
 			<p>
 				I'm <span class="typed"
-					data-typed-items="An Engineer., a Student., Ready to work."></span>
+					data-typed-items="A Learner., a Student., Ready to work."></span>
 			</p>
 			<p><%=(session.getAttribute("error") == null) ? "" : session.getAttribute("error")%></p>
 		</div>
@@ -337,7 +341,7 @@ if (pdescr2 != null) {
 									<li><i class="icofont-rounded-right"></i> <strong>Email
 											Id: </strong> <%=rs.getString(9)%></li>
 									<li><i class="icofont-rounded-right"></i> <strong>Github
-											Profile: </strong><br><%=rs.getString(5)%></li>
+											Profile: </strong><a href="<%=rs.getString(5)%>" target="_blank" style="color:black;"><%=rs.getString(5)%></a></li>
 								</ul>
 							</div>
 						</div>
@@ -487,9 +491,9 @@ if (pdescr2 != null) {
 						out.print("<div class='col-lg-6' data-aos='fade-up' data-aos-delay='100'>");
 						out.print("<h3 class='resume-title'>Projects</h3>");
 						out.print("<div class='resume-item'>");
-						out.print("<h4>" + rs.getString(34) + "</h4>");
-						out.print("<h5>" + rs.getString(35) + "</h5>");
-						out.print("<p><em>" + rs.getString(36) + "</em></p>");
+						out.print("<h4>" + rs.getString(35) + "</h4>");
+						out.print("<h5>" + rs.getString(36) + "</h5>");
+						out.print("<p><em>" + rs.getString(37) + "</em></p>");
 						out.print("<ul>");
 						for (int i = 0; i < pdescr1.length; i++) {
 							out.print("<li>" + pdescr1[i] + ".</li>");
@@ -499,9 +503,9 @@ if (pdescr2 != null) {
 					}
 					if (pdescr2 != null) {
 						out.print("<div class='resume-item'>");
-						out.print("<h4>" + rs.getString(38) + "</h4>");
-						out.print("<h5>" + rs.getString(39) + "</h5>");
-						out.print("<p><em>" + rs.getString(40) + "</em></p>");
+						out.print("<h4>" + rs.getString(39) + "</h4>");
+						out.print("<h5>" + rs.getString(40) + "</h5>");
+						out.print("<p><em>" + rs.getString(41) + "</em></p>");
 						out.print("<ul>");
 						for (int i = 0; i < pdescr_2.length; i++) {
 							out.print("<li>" + pdescr_2[i] + ".</li>");
@@ -526,14 +530,6 @@ if (pdescr2 != null) {
 						<div class="col-sm-7">
 							<h2>Our Recruiters</h2>
 						</div>
-						<div class="col-sm-5">
-							<form id="searchBar" class="form-inline my-2 my-lg-0">
-								<input class="form-control mr-sm-2" type="search"
-									placeholder="Search" aria-label="Search">
-								<button class="btn btn-outline-success my-2 my-sm-0"
-									type="submit">Search</button>
-							</form>
-						</div>
 					</div>
 
 
@@ -555,7 +551,7 @@ if (pdescr2 != null) {
 
 				<div class="row portfolio-container" data-aos="fade-up"
 					data-aos-delay="100">
-					<div class="col-lg-4 col-md-6 portfolio-item filter-web">
+					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
 						<div class="portfolio-wrap">
 							<img src="assets/img/2 . AMAZON2.png" class="img-fluid" alt="">
 							<div class="portfolio-links">
@@ -568,7 +564,7 @@ if (pdescr2 != null) {
 						</div>
 					</div>
 
-					<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
 						<div class="portfolio-wrap">
 							<img src="assets/img/1 . GOOGLE.jpg" class="img-fluid" alt="">
 							<div class="portfolio-links">
@@ -594,7 +590,7 @@ if (pdescr2 != null) {
 						</div>
 					</div>
 
-					<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
 						<div class="portfolio-wrap">
 							<img src="assets/img/5 . DELOITTE5.png" class="img-fluid" alt="">
 							<div class="portfolio-links">
@@ -620,7 +616,7 @@ if (pdescr2 != null) {
 						</div>
 					</div>
 
-					<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+					<div class="col-lg-4 col-md-6 portfolio-item filter-web">
 						<div class="portfolio-wrap">
 							<img src="assets/img/11 . HYUNDAI.png" class="img-fluid" alt="">
 							<div class="portfolio-links">
@@ -633,7 +629,7 @@ if (pdescr2 != null) {
 						</div>
 					</div>
 
-					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
+					<div class="col-lg-4 col-md-6 portfolio-item filter-web">
 						<div class="portfolio-wrap">
 							<img src="assets/img/12 . GSK.png" class="img-fluid" alt="">
 							<div class="portfolio-links">
@@ -646,7 +642,7 @@ if (pdescr2 != null) {
 						</div>
 					</div>
 
-					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
+					<div class="col-lg-4 col-md-6 portfolio-item filter-web">
 						<div class="portfolio-wrap">
 							<img src="assets/img/13 . PVR.jpg" class="img-fluid" alt="">
 							<div class="portfolio-links">
@@ -673,7 +669,6 @@ if (pdescr2 != null) {
 					</div>
 
 				</div>
-
 			</div>
 		</section>
 		<!-- End Portfolio Section -->
@@ -686,14 +681,6 @@ if (pdescr2 != null) {
 					<div class="row">
 						<div class="col-sm-7">
 							<h2>Projects</h2>
-						</div>
-						<div class="col-sm-5">
-							<form id="searchBar" class="form-inline my-2 my-lg-0">
-								<input class="form-control mr-sm-2" type="search"
-									placeholder="Search" aria-label="Search">
-								<button class="btn btn-outline-success my-2 my-sm-0"
-									type="submit">Search</button>
-							</form>
 						</div>
 					</div>
 					<p>Make a good project to get selected in your dream company,
@@ -799,45 +786,19 @@ if (pdescr2 != null) {
 		<script src="assets/js/main.js"></script>
 </body>
 <script>
-  var projectBtn = document.getElementById('projectBtn');
- var scndProject = document.getElementById('scndProject');
- var modalBody = document.getElementsByClassName('modal-body');
- console.log(projectBtn)
- projectBtn.addEventListener('click',(e)=>{
-   e.preventDefault();
-   console.log("scncis")
-  projectBtn.style.visibility='hidden';
-    scndProject.innerHTML=` <form action="../addProject?pno=2" method="post">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Project-2 Name</label>
-              <input type="text" name="pname" class="form-control" aria-describedby="emailHelp">
-             
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Project-2 Enviroment</label>
-              <input type="text" name="penv" class="form-control" aria-describedby="emailHelp">
-             
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Project-2 Technologies</label>
-              <input type="text" name="ptech" class="form-control" aria-describedby="emailHelp">
-             
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Project-2 Details</label>
-              <textarea name="pdescr" class="form-control" rows="3"></textarea>
-            </div>
-            <br><br>
-            <div class="modal-footer">
+  var alert = document.getElementById('alert');
+  var submit = document.getElementById('sub');
+  console.log(submit);
+  
+  submit.addEventListener('click',(e)=>{
+    alert.innerHTML=`<div class="alert alert-success" role="alert">
+        Project Added!
+      </div>`;
+      setTimeout(() => {
+        console.log('done');
 
-			<input type="submit" id="passwordBtn" value="Save changes"
-				class="btn btn-primary">
-		</div>
-            
-           
-            
-          </form>`;
- })
-
+        alert.innerHTML=``;
+      }, 300000);
+  })
 </script>
 </html>

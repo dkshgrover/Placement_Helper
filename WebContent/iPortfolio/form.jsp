@@ -21,9 +21,12 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" href="./assets/css/fontawesome.min.css">
+<!-- Favicons -->
+<link rel="shortcut icon" href="../assets/img/favicon.ico"
+	type="image/x-icon">
 <style>
 .width {
-	width: 99%;
+	width: 97%;
 	margin-left: 10px;
 }
 
@@ -208,12 +211,12 @@ hr.above-hr, hr.below-hr {
 			<div class="col-md-6 mb-3">
 				<label for="fname" class="label">First name</label> <input
 					type="text" class="form-control" id="fname" name="fname"
-					placeholder="Daksh" required>
+					placeholder="First Name.." required>
 			</div>
 			<div class="col-md-6 mb-3">
 				<label for="lname" class="label">Last name</label> <input
 					type="text" class="form-control" id="lname" name="lname"
-					placeholder="Grover" required>
+					placeholder="Last Name.." required>
 			</div>
 		</div>
 		<div class="form-row width">
@@ -240,12 +243,12 @@ hr.above-hr, hr.below-hr {
 		<div class="form-group width">
 			<label for="tempAddress" class="label">Main Landmark</label> <input
 				type="text" class="form-control" id="tempAddress" name="tempAddress"
-				placeholder="#123, street no. 1, sunny enclave">
+				placeholder="Temporary Address">
 		</div>
 		<div class="form-row width">
 			<div class="form-group col-md-6">
 				<label for="city" class="label">City</label> <input type="text"
-					class="form-control" id="city" name="city" placeholder="city">
+					class="form-control" id="city" name="city" placeholder="City">
 			</div>
 			<div class="form-group col-md-4">
 				<label for="state" class="label">State</label> <select id="state"
@@ -283,7 +286,7 @@ hr.above-hr, hr.below-hr {
 			</div>
 			<div class="form-group col-md-2">
 				<label for="zip" class="label">Zip</label> <input type="text"
-					class="form-control" id="zip" name="zip">
+					class="form-control" id="zip" name="zip" placeholder="Zip">
 			</div>
 		</div>
 		<br>
@@ -292,12 +295,12 @@ hr.above-hr, hr.below-hr {
 		<div class="form-group width">
 			<label for="permAddress" class="label">Main Landmark</label> <input
 				type="text" class="form-control" id="permAddress" name="permAddress"
-				placeholder="#45, street no. 9, somdatt's landmark">
+				placeholder="Permanent Address">
 		</div>
 		<div class="form-row width">
 			<div class="form-group col-md-6">
 				<label for="city2" class="label">City</label> <input type="text"
-					class="form-control" id="city2" name="city2" placeholder="city">
+					class="form-control" id="city2" name="city2" placeholder="City">
 			</div>
 			<div class="form-group col-md-4">
 				<label for="state2" class="label">State</label> <select id="state2"
@@ -335,7 +338,7 @@ hr.above-hr, hr.below-hr {
 			</div>
 			<div class="form-group col-md-2">
 				<label for="zip2" class="label">Zip</label> <input type="text"
-					class="form-control" id="zip2" name="zip2">
+					class="form-control" id="zip2" name="zip2" placeholder="Zip">
 			</div>
 			<h4 class="width"
 				style="border-bottom: 1px solid black; margin-top: 2%;">Your
@@ -344,7 +347,7 @@ hr.above-hr, hr.below-hr {
 				<div class="form-group col-md-6">
 					<label for="sclname" class="label">School Name</label> <input
 						type="text" class="form-control" id="sclname" name="sclname"
-						placeholder="abc school">
+						placeholder="School Name">
 				</div>
 				<div class="form-group col-md-4">
 					<label for="sclleaving" class="label">School Leaving Year</label> <input
@@ -365,7 +368,7 @@ hr.above-hr, hr.below-hr {
 				<div class="form-group col-md-6">
 					<label for="clgname" class="label">College Name</label> <input
 						type="text" class="form-control" id="clgname" name="clgname"
-						placeholder="xyz college">
+						placeholder="College Name">
 				</div>
 				<div class="form-group col-md-4">
 					<label for="clgleaving" class="label">College Passing Year</label>

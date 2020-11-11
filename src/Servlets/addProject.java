@@ -16,9 +16,10 @@ import DBConnection.ConnectionProvider;
 
 @WebServlet("/addProject")
 public class addProject extends HttpServlet {
-	
+	private static final long serialVersionUID = 1L;
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,15 +29,16 @@ public class addProject extends HttpServlet {
 			ResultSet rs = (ResultSet)session.getAttribute("resultSet");
 			String qry = "";
 			String s_id = rs.getString(9);
-			String pno = request.getParameter("pno");
+			int pno = Integer.parseInt(request.getParameter("pno"));
+//			System.out.println(pno);
 			String pname = request.getParameter("pname");
 			String penv = request.getParameter("penv");
 			String ptech = request.getParameter("ptech");
 			String pdescr = request.getParameter("pdescr");
-			if(pno.equals("2")) {
-				qry = "update projects set pname2=?, penv2=?, ptech2=?, pdescr2=? where s_id=?";
-			}else {
+			if(pno == 1) {
 				qry = "update projects set pname=?, penv=?, ptech=?, pdescr=? where s_id=?";
+			}else {
+				qry = "update projects set pname2=?, penv2=?, ptech2=?, pdescr2=? where s_id=?";
 			}
 			PreparedStatement st = con.prepareStatement(qry);
 			st.setString(1, pname);
@@ -51,8 +53,6 @@ public class addProject extends HttpServlet {
 		}catch(Exception e) {
 			
 		}
-		
-
 	}
 
 }

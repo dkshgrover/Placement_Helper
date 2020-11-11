@@ -50,21 +50,26 @@ public class LoginServlet extends HttpServlet {
 					response.sendRedirect("assets/index.jsp");
 				} else {
 					request.setAttribute("error", "Incorrect Details Filled **");
-					RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("register.jsp?loginAs=student");
 					rd.forward(request, response);
 				}
-			} else {
+			} 
+			else if(loginAs.equalsIgnoreCase("college_administrator")) {
 				ResultSet rs = CheckLoginCollege_Admin.checkLogin(obj);
 				if (rs.next()) {
 					HttpSession session = request.getSession();
-					session.setAttribute("uname", uname);
+					session.setAttribute("unameAdmin", uname);
 					session.setAttribute("resultSet", rs);
-					response.sendRedirect("");
+					response.sendRedirect("admin/index.jsp");
 				} else {
 					request.setAttribute("error", "Incorrect Details Filled **");
-					RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("register.jsp?loginAs=college_administrator");
 					rd.forward(request, response);
 				}
+			}
+			else {
+				request.setAttribute("error", "Wrong url, Choose again**");
+				request.getRequestDispatcher("chooseUser.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 

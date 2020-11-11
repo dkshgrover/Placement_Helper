@@ -62,7 +62,7 @@
 								+ rs.getString(2) + "</button>");
 						out.print("<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>");
 						out.print("<a class='dropdown-item' href='iPortfolio/index.jsp'>Dashboard</a>");
-						out.print("<a class='dropdown-item' href='logoutServlet'>Log-Out</a>");
+						out.print("<a class='dropdown-item' href='logoutServlet?as=student'>Log-Out</a>");
 						out.print("</div>");
 						out.print("</div>");
 					} else {

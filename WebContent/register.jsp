@@ -1,3 +1,4 @@
+<%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
@@ -39,8 +40,8 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 <body onscroll="fun1()">
 	<%
 		if (!(session.getAttribute("uname") == null)) {
-		response.sendRedirect("assets/index.jsp");
-	}
+			response.sendRedirect("assets/index.jsp");
+		}
 	%>
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="scrl">
 		<div class="container">
@@ -97,34 +98,36 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 												</div>
 												<%
 													String loginAs = request.getParameter("loginAs");
-												session.setAttribute("loginAs", loginAs);
+													session.setAttribute("loginAs", loginAs);
+														out.print("<form action='LoginServlet' method='post'>");
+															out.print("<div class='group mt-4'>");
+																out.print("<label for='uname' class='label'>Username</label>");
+																out.print("<input id='uname' name='uname' type='email' class='input' placeholder='Enter your username'>");
+															out.print("</div>");
+															out.print("<div class='group'>");
+																out.print("<label for='pass' class='label'>Password</label>"); 
+																out.print("<input id='pass' type='password' name='pass' class='input' data-type='password' placeholder='Enter your password'></div>");
+																if(request.getAttribute("alreadyReg")!= null)
+																	{out.print("<p style='color: pink; font-weight: bold;'>"+(request.getAttribute("alreadyReg"))+"</p>");}
+																if(request.getAttribute("loginFirst")!=null)
+																	{out.print("<p style='color: pink; font-weight: bold;'>"+(request.getAttribute("loginFirst"))+"</p>");}
+																if(request.getAttribute("error")!=null)
+																	{out.print("<p style='color: pink; font-weight: bold;'>"+request.getAttribute("error")+"</p>");}
+																if(request.getAttribute("registered")!=null)
+																	{out.print("<p style='color: pink; font-weight: bold;'>"+request.getAttribute("registered")+"</p>");}
+																if(request.getAttribute("details_filled")!=null)
+																	{out.print("<p style='color: pink; font-weight: bold;'>"+(request.getAttribute("details_filled"))+"</p>");}
+																if(request.getParameter("status")!=null)
+																	{out.print("<p style='color: pink; font-weight: bold;'>"+(request.getParameter("status"))+"</p>");}
+															out.print("<div class='group'>");
+																out.print("<input id='check' type='checkbox' class='check' name='check' checked> <label for='check'><span class='icon'></span> Keep me Signed in</label>");
+															out.print("</div>");
+															out.print("<div class='group'>");
+																out.print("<input type='submit' class='button' value='Sign In'>");
+																out.print("</div>");
+														out.print("</form>");
 												%>
-												<form action="LoginServlet" method="post">
-													<div class="group mt-4">
-														<label for="uname" class="label">Username</label> <input
-															id="uname" name="uname" type="text" class="input"
-															placeholder="Enter your username">
-													</div>
-													<div class="group">
-														<label for="pass" class="label">Password</label> <input
-															id="pass" type="password" name="pass" class="input"
-															data-type="password" placeholder="Enter your password">
-													</div>
-													<p style="color: pink; font-weight: bold;"><%=(request.getAttribute("alreadyReg") == null) ? "" : request.getAttribute("alreadyReg")%></p>
-													<p style="color: pink; font-weight: bold;"><%=(request.getParameter("loginFirst") == null) ? "" : request.getParameter("loginFirst")%></p>
-													<p style="color: pink; font-weight: bold;"><%=(request.getAttribute("registered") == null) ? "" : request.getAttribute("registered")%></p>
-													<p style="color: pink; font-weight: bold;"><%=(request.getAttribute("error") == null) ? "" : request.getAttribute("error")%></p>
-													<p style="color: pink; font-weight: bold;"><%=(request.getAttribute("details_filled") == null) ? "" : request.getAttribute("details_filled")%></p>
-
-													<div class="group">
-														<input id="check" type="checkbox" class="check"
-															name="check" checked> <label for="check"><span
-															class="icon"></span> Keep me Signed in</label>
-													</div>
-													<div class="group">
-														<input type="submit" class="button" value="Sign In">
-													</div>
-												</form>
+												
 											</div>
 											<div class="sign-up-form">
 												<form action="RegisterServlet" method="post">
@@ -149,7 +152,7 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 													</div>
 													<div class="group">
 														<label for="pass" class="label">Email Address</label> <input
-															id="pass" name="email" type="text" class="input"
+															id="pass" name="email" type="email" class="input"
 															placeholder="Enter your email address">
 													</div>
 													<p style="color: pink; font-weight: bold;"><%=request.getAttribute("passMismatch") == null ? "" : request.getAttribute("passMismatch")%></p>
@@ -236,6 +239,5 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 		</div>
 
 	</div>
-</body>
 </body>
 </html>

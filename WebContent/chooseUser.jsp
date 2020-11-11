@@ -72,6 +72,7 @@
 			</div>
 		</div>
 	</nav>
+	<p style="margin-top: 6.5%; margin-left: 1%; color: red;"><%=(request.getAttribute("error") == null) ? "" : request.getAttribute("error")%></p>
 	<div class="container">
 	<div class="row">
 	<div class="col-sm-6 mt-5">
@@ -83,7 +84,6 @@
      	<h4 class="text-center" style="margin-top:-18%;">COLLEGE ADMINISTRATOR</h4>
 	</div>
 	</div>
-		
      	
      </div>
           <footer>

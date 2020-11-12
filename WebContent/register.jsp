@@ -94,7 +94,6 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 										<div class="login-space">
 											<div class="login">
 												<div id="fogot">
-													<a href="#">Forgot Password?</a>
 												</div>
 												<%
 													String loginAs = request.getParameter("loginAs");
@@ -111,6 +110,8 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 																	{out.print("<p style='color: pink; font-weight: bold;'>"+(request.getAttribute("alreadyReg"))+"</p>");}
 																if(request.getAttribute("loginFirst")!=null)
 																	{out.print("<p style='color: pink; font-weight: bold;'>"+(request.getAttribute("loginFirst"))+"</p>");}
+																if(request.getParameter("loginFirst")!=null)
+																	{out.print("<p style='color: pink; font-weight: bold;'>"+(request.getParameter("loginFirst"))+"</p>");}
 																if(request.getAttribute("error")!=null)
 																	{out.print("<p style='color: pink; font-weight: bold;'>"+request.getAttribute("error")+"</p>");}
 																if(request.getAttribute("registered")!=null)
@@ -153,7 +154,7 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 													<div class="group">
 														<label for="pass" class="label">Email Address</label> <input
 															id="pass" name="email" type="email" class="input"
-															placeholder="Enter your email address">
+															placeholder="Enter your official email address">
 													</div>
 													<p style="color: pink; font-weight: bold;"><%=request.getAttribute("passMismatch") == null ? "" : request.getAttribute("passMismatch")%></p>
 

@@ -23,7 +23,6 @@ public class updateRequest extends HttpServlet {
 		int cid = Integer.parseInt(request.getParameter("cid"));
 		try {
 			Connection con = ConnectionProvider.provideConnection();
-			HttpSession session = request.getSession();
 			if(status.equals("accepted")) {
 				String query = "update students set status='accepted' where s_id="+uname;
 				String query2 = "update college_administrator set acceptedReq=acceptedReq+1, pendingReq=pendingReq-1 where cid="+cid;

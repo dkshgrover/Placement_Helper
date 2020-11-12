@@ -15,16 +15,21 @@ public class logoutServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String user = request.getParameter("as");
-		if(user.equals("admin")) {
-			session.removeAttribute("unameAdmin");
-			session.removeAttribute("resultSet");
-		}
-		else {
-			session.removeAttribute("uname");
-			session.removeAttribute("resultSet");
-			session.removeAttribute("resultSet2");
-			session.removeAttribute("resultSet3");
-			session.removeAttribute("resultSet4");
+		if (user.equals("admin")) {
+			if (session.getAttribute("unameAdmin") != null && session.getAttribute("resultSet") != null) {
+				session.removeAttribute("unameAdmin");
+				session.removeAttribute("resultSet");
+			}
+		} else {
+			if (session.getAttribute("uname") != null && session.getAttribute("resultSet") != null
+					&& session.getAttribute("resultSet2") != null && session.getAttribute("resultSet3") != null
+					&& session.getAttribute("resultSet4") != null) {
+				session.removeAttribute("uname");
+				session.removeAttribute("resultSet");
+				session.removeAttribute("resultSet2");
+				session.removeAttribute("resultSet3");
+				session.removeAttribute("resultSet4");
+			}
 		}
 		session.invalidate();
 		response.sendRedirect("assets/index.jsp");

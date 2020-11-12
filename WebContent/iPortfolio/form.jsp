@@ -211,12 +211,12 @@ hr.above-hr, hr.below-hr {
 			<div class="col-md-6 mb-3">
 				<label for="fname" class="label">First name</label> <input
 					type="text" class="form-control" id="fname" name="fname"
-					placeholder="First Name.." required>
+					placeholder="First Name" required>
 			</div>
 			<div class="col-md-6 mb-3">
 				<label for="lname" class="label">Last name</label> <input
 					type="text" class="form-control" id="lname" name="lname"
-					placeholder="Last Name.." required>
+					placeholder="Last Name" required>
 			</div>
 		</div>
 		<div class="form-row width">
@@ -428,70 +428,70 @@ hr.above-hr, hr.below-hr {
 			</select>
 			<h4 class="width"
 				style="border-bottom: 1px solid black; margin-top: 2%;">Your
-				Skills and percentages</h4>
+				Skills and Values</h4>
 			<hr>
 			<div class="form-row width">
 				<div class="col">
-					<label for="skill1" class="label">Enter Your skill 1</label> <input
+					<label for="skill1" class="label">Skill</label> <input
 						type="text" class="form-control" id="skill1" name="skill1"
-						placeholder="Skill 1">
+						placeholder="Skill">
 				</div>
 				<div class="col">
-					<label for="skill2" class="label">Percentage</label> <input
+					<label for="skill2" class="label">Value</label> <input
 						type="text" class="form-control" name="perc1"
-						placeholder="Percentage">
+						placeholder="in %age">
 				</div>
 				<div class="col">
-					<label for="skill2" class="label">Enter Your skill 2</label> <input
+					<label for="skill2" class="label">Skill</label> <input
 						type="text" class="form-control" id="skill2" name="skill2"
-						placeholder="Skill 2">
+						placeholder="Skill">
 				</div>
 				<div class="col">
-					<label for="skill2" class="label">Percentage</label> <input
+					<label for="skill2" class="label">Value</label> <input
 						type="text" class="form-control" name="perc2"
-						placeholder="Percentage">
+						placeholder="in %age">
 				</div>
 				<div class="col">
-					<label for="skill3" class="label">Enter Your skill 3</label> <input
+					<label for="skill3" class="label">Skill</label> <input
 						type="text" class="form-control" id="skill3" name="skill3"
-						placeholder="Skill 3">
+						placeholder="Skill">
 				</div>
 				<div class="col">
-					<label for="skill3" class="label">Percentage</label> <input
+					<label for="skill3" class="label">Value</label> <input
 						type="text" class="form-control" name="perc3"
-						placeholder="Percentage">
+						placeholder="in %age">
 				</div>
 			</div>
 			<div class="form-row width">
 				<div class="col">
-					<label for="skill4" class="label">Enter Your skill 4</label> <input
+					<label for="skill4" class="label">Skill</label> <input
 						type="text" class="form-control" id="skill4" name="skill4"
-						placeholder="Skill 4">
+						placeholder="Skill">
 				</div>
 				<div class="col">
-					<label for="skill2" class="label">Percentage</label> <input
+					<label for="skill2" class="label">Value</label> <input
 						type="text" class="form-control" name="perc4"
-						placeholder="Percentage">
+						placeholder="in %age">
 				</div>
 				<div class="col">
-					<label for="skill5" class="label">Enter Your skill 5</label> <input
+					<label for="skill5" class="label">Skill</label> <input
 						type="text" class="form-control" id="skill5" name="skill5"
-						placeholder="Skill 5">
+						placeholder="Skill">
 				</div>
 				<div class="col">
-					<label for="skill5" class="label">Percentage</label> <input
+					<label for="skill5" class="label">Value</label> <input
 						type="text" class="form-control" name="perc5"
-						placeholder="Percentage">
+						placeholder="in %age">
 				</div>
 				<div class="col">
-					<label for="skill6" class="label">Enter Your skill 6</label> <input
+					<label for="skill6" class="label">Skill</label> <input
 						type="text" class="form-control" id="skill6" name="skill6"
-						placeholder="Skill 6">
+						placeholder="Skill">
 				</div>
 				<div class="col">
-					<label for="skill6" class="label">Percentage</label> <input
+					<label for="skill6" class="label">Value</label> <input
 						type="text" class="form-control" name="perc6"
-						placeholder="Percentage">
+						placeholder="in %age">
 				</div>
 			</div>
 		</div>

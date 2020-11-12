@@ -38,7 +38,7 @@
 <body onscroll="fun1()">
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="scrl">
 		<div class="container">
-			<a class="navbar-brand" href="#"><img
+			<a class="navbar-brand" href="assets/index.jsp"><img
 				src="./assets/img/Logo (1).png" height="70px" width="150px" alt=""
 				srcset=""></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"

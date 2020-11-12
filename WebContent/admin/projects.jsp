@@ -35,12 +35,13 @@
 <body id="page-top">
 	<%
 		if (session.getAttribute("unameAdmin") == null) {
-		request.getRequestDispatcher("../servlet1?loginFirst=You are not logged in**").forward(request, response);
-	}
+			request.getRequestDispatcher("../servlet1?loginFirst=You are not logged in**").forward(request, response);
+		}
 	%>
 	<%
-		ResultSet rs = (ResultSet)session.getAttribute("resultSet");
+		ResultSet rs = (ResultSet) session.getAttribute("resultSet");
 		ResultSet rs2 = (ResultSet)session.getAttribute("resultSet2");
+		session.removeAttribute("resultSet2");
 	%>
 	
 	<!-- Page Wrapper -->
@@ -52,22 +53,20 @@
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a
-				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="index.jsp">
-				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-laugh-wink"></i>
-				</div>
-				<div class="sidebar-brand-text mx-3">Placement Helper</div>
-			</a>
+			<%
+			out.print("<a class='sidebar-brand d-flex align-items-center justify-content-center' href='../indexAdmin?id="+rs.getInt(1)+"'>");
+				out.print("<div class='sidebar-brand-icon rotate-n-15'>");
+					out.print("<i class='fas fa-laugh-wink'></i>");
+				out.print("</div>");
+				out.print("<div class='sidebar-brand-text mx-3'>Placement Helper</div>");
+			out.print("</a>");
+			%>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item"><a class="nav-link" href="index.jsp"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
-			</a></li>
+			<%out.print("<li class='nav-item'><a class='nav-link' href='../indexAdmin?id="+rs.getInt(1)+"'> <i class='fas fa-fw fa-tachometer-alt'></i> <span>Dashboard</span></a></li>");%>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">
@@ -231,19 +230,20 @@
 									</thead>
 									<tbody>
 										<%
-										if(rs.getInt(1) == 1 || rs.getInt(1) == 3 || rs.getInt(1) == 4)
-										while(rs2.next()){
-											out.print("<tr>");
-											out.print("<td>");
-											out.print("<a href='../editProject?id="+rs2.getInt(1)+"' class='btn btn-info'> <span class='text'>Edit</span></a>");
-											out.print("<a href='../deleteProject?id="+rs2.getInt(1)+"' id='sub1' class='btn btn-danger btn-icon-split mt-2'> <span class='icon text-white-50'> <i class='fas fa-trash'></i></span> <span class='text'>Delete</span></a></td>");
-											out.print("<td>"+rs2.getString(2)+"</td>");
-											out.print("<td>"+rs2.getString(4)+"</td>");
-											out.print("<td>"+rs2.getString(5)+"</td>");
-											out.print("<td>"+rs2.getString(8)+"<br>"+rs2.getString(9)+"</td>");
-											out.print("<td>"+rs2.getString(10)+"</td>");
-											out.print("<td>"+rs2.getString(6)+"<br>"+rs2.getString(7)+"</td>");
-											out.print("</tr>");
+										if(rs.getInt(1) == 1 || rs.getInt(1) == 3 || rs.getInt(1) == 4){
+											while(rs2.next()){
+												out.print("<tr>");
+												out.print("<td>");
+												out.print("<a href='../editProject?id="+rs2.getInt(1)+"' class='btn btn-info'> <span class='text'>Edit</span></a>");
+												out.print("<a href='../deleteProject?id="+rs2.getInt(1)+"' id='sub1' class='btn btn-danger btn-icon-split mt-2'> <span class='icon text-white-50'> <i class='fas fa-trash'></i></span> <span class='text'>Delete</span></a></td>");
+												out.print("<td>"+rs2.getString(2)+"</td>");
+												out.print("<td>"+rs2.getString(4)+"</td>");
+												out.print("<td>"+rs2.getString(5)+"</td>");
+												out.print("<td>"+rs2.getString(8)+"<br>"+rs2.getString(9)+"</td>");
+												out.print("<td>"+rs2.getString(10)+"</td>");
+												out.print("<td>"+rs2.getString(6)+"<br>"+rs2.getString(7)+"</td>");
+												out.print("</tr>");
+											}	
 										}
 										%>
 									</tbody>

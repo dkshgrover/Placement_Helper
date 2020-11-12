@@ -64,7 +64,9 @@ public class RegisterServlet extends HttpServlet {
 				Statement statement = con.createStatement();
 				ResultSet rs = statement.executeQuery(query2);
 				if(rs.next()) {
-					request.setAttribute("alreadyReg", "You have already registered**");
+					statement.close();
+					rs.close();
+					request.setAttribute("alreadyReg", "You have already registered **");
 					request.getRequestDispatcher("register.jsp?loginAs=student").forward(request, response);
 				}else {
 					String qry = "insert into projects(s_id) values(?)";
@@ -73,15 +75,15 @@ public class RegisterServlet extends HttpServlet {
 					PreparedStatement st = con.prepareStatement(query);
 					PreparedStatement st2 = con.prepareStatement(qry);
 					Statement st3 = con.createStatement();
-					st3.executeUpdate(qry2);
 					st2.setString(1, email);
 					st.setInt(1, uname);
 					st.setInt(2, college_id);
 					st.setString(3, email);
 					st.setString(4, pass);
 					st.setString(5, "pending");
-					int rows = st.executeUpdate();
+					st.executeUpdate();
 					st2.executeUpdate();
+					st3.executeUpdate(qry2);
 					//System.out.println(rows + " Rows Updated");
 					request.setAttribute("registered", "You have been registered **");
 					RequestDispatcher rd = request.getRequestDispatcher("register.jsp?loginAs=student");
@@ -94,14 +96,14 @@ public class RegisterServlet extends HttpServlet {
 				st.setInt(1, uname);
 				st.setString(2, email);
 				st.setString(3, pass);
-				int rows = st.executeUpdate();
+				st.executeUpdate();
 //				System.out.println(rows + " Rows Updated");
 				request.setAttribute("registered", "You have been registered **");
 				RequestDispatcher rd = request.getRequestDispatcher("register.jsp?loginAs=college_administrator");
 				rd.forward(request, response);
 			}
 			else {
-				request.setAttribute("error", "Wrong url, Choose again**");
+				request.setAttribute("error", "Wrong url, Choose again **");
 				request.getRequestDispatcher("chooseUser.jsp").forward(request, response);
 			}
 		} catch (Exception e) {

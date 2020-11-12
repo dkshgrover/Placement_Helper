@@ -48,7 +48,7 @@ public class addProject extends HttpServlet {
 			st.setString(5, s_id);
 			int rows = st.executeUpdate();
 			if(rows == 1) {
-				response.sendRedirect("assets/index.jsp?loginAgain=Details updated**");
+				response.sendRedirect("indexStudent?id="+s_id);
 			}
 		}catch(Exception e) {
 			

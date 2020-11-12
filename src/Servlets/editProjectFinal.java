@@ -27,14 +27,6 @@ public class editProjectFinal extends HttpServlet {
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<String> fileNames = new ArrayList<String>();
-		try {
-			HttpSession session = request.getSession();
-			ResultSet rs5 = (ResultSet)session.getAttribute("resultSet5");
-			rs5 = null;
-			session.removeAttribute("resultSet5");
-		}catch(Exception e) {
-			
-		}
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		String pname = request.getParameter("pname");
 		String pdescr = request.getParameter("pdescr");
@@ -109,7 +101,7 @@ public class editProjectFinal extends HttpServlet {
 			int rows = st.executeUpdate();
 //			System.out.println(rows);
 			if(rows == 1) {
-				response.sendRedirect("admin/projects.jsp?updated=Project details updated**");
+				response.sendRedirect("getProjects");
 			}else {
 				response.sendRedirect("admin/projects.jsp?error=Some error occured**");
 			}

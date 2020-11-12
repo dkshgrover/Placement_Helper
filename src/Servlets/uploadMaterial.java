@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,13 +29,14 @@ public class uploadMaterial extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Connection con = null;
 		String type = request.getParameter("type");
 		int cid = Integer.parseInt(request.getParameter("cid"));
-//		System.out.println(cid+" "+type);
+		int ctid = Integer.parseInt(request.getParameter("ctid"));
 		String query = "update companies set ";
 		Collection<Part> files = request.getParts();
-		if(files.size()>5) {
-			response.sendRedirect("admin/companies.jsp?error=Some error occured**");
+		if(files.size() != 5) {
+			response.sendRedirect("getCompanies?type="+ctid+"&error=Upload 5 files **");
 		}else {
 			String basePath = request.getServletContext().getRealPath("/");
 			String realPath = "";
@@ -53,7 +55,6 @@ public class uploadMaterial extends HttpServlet {
 				if (!(fileName == null)) {
 					fileNames.add(fileName);
 					realPath = basePath + "/" + fileName;
-//					System.out.println(realPath);
 					InputStream is = p.getInputStream();
 					try {
 						byte[] file = new byte[is.available()];
@@ -67,10 +68,8 @@ public class uploadMaterial extends HttpServlet {
 					}
 				}
 			}
-//			System.out.println(fileNames.size());
-//			System.out.println(fileNames);
 			try {
-				Connection con = ConnectionProvider.provideConnection();
+				con = ConnectionProvider.provideConnection();
 				for(int i=0;i<fileNames.size();i++) {
 					if(i == fileNames.size() - 1) {
 						query = query + type+(i+1)+"='"+fileNames.get(i)+"' where comp_id="+cid;
@@ -78,18 +77,16 @@ public class uploadMaterial extends HttpServlet {
 					}
 					query = query + type+(i+1)+"='"+fileNames.get(i)+"' , ";
 				}
-//				System.out.println(query);
 				Statement st = con.createStatement();
 				int rows = st.executeUpdate(query);
 				if(rows != 0) {
-					response.sendRedirect("getCompanies?type=1");
+					response.sendRedirect("getCompanies?type="+ctid);
 				}else {
 					response.sendRedirect("admin/companies.jsp?error=Some error occured**");
 				}
 			}catch(Exception ex) {
 				
 			}
-		}
-			
+		}	
 	}
 }

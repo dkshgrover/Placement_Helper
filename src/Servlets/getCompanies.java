@@ -20,14 +20,6 @@ public class getCompanies extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			HttpSession session = request.getSession();
-			ResultSet rs6 = (ResultSet)session.getAttribute("resultSet6");
-			rs6 = null;
-			session.removeAttribute("resultSet6");
-		}catch(Exception e) {
-			
-		}
-		try {
 			int ctid = Integer.parseInt(request.getParameter("type"));
 			Connection con = ConnectionProvider.provideConnection();
 			String query = "select * from companies where ctid="+ctid;
@@ -35,7 +27,13 @@ public class getCompanies extends HttpServlet {
 			ResultSet rs3 = st.executeQuery(query);
 			HttpSession session = request.getSession();
 			session.setAttribute("resultSet3", rs3);
-			response.sendRedirect("admin/companies.jsp");
+			if(request.getParameter("error") == null) {
+				response.sendRedirect("admin/companies.jsp");
+			}else {
+				String error = request.getParameter("error");
+				response.sendRedirect("admin/companies.jsp?error="+error);
+			}
+			
 		}catch(Exception e) {
 			
 		}

@@ -20,7 +20,7 @@ public class getRequests extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Connection con  = ConnectionProvider.provideConnection();
-			String query = "select * from students where s_name IS NULL";
+			String query = "select * from students where s_name IS NULL and status='pending'";
 			Statement st = con.createStatement();
 			ResultSet rs4 = st.executeQuery(query);
 			HttpSession session = request.getSession();

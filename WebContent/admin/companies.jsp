@@ -41,6 +41,7 @@
 	<%
 		ResultSet rs = (ResultSet)session.getAttribute("resultSet");
 		ResultSet rs3 = (ResultSet)session.getAttribute("resultSet3");
+		session.removeAttribute("resultSet3");
 	%>
 	<!-- Page Wrapper -->
 	<div id="wrapper">
@@ -51,22 +52,20 @@
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a
-				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="index.jsp">
-				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-laugh-wink"></i>
-				</div>
-				<div class="sidebar-brand-text mx-3">Placement Helper</div>
-			</a>
+			<%
+			out.print("<a class='sidebar-brand d-flex align-items-center justify-content-center' href='../indexAdmin?id="+rs.getInt(1)+"'>");
+				out.print("<div class='sidebar-brand-icon rotate-n-15'>");
+					out.print("<i class='fas fa-laugh-wink'></i>");
+				out.print("</div>");
+				out.print("<div class='sidebar-brand-text mx-3'>Placement Helper</div>");
+			out.print("</a>");
+			%>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item"><a class="nav-link" href="index.jsp"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
-			</a></li>
+			<%out.print("<li class='nav-item'><a class='nav-link' href='../indexAdmin?id="+rs.getInt(1)+"'> <i class='fas fa-fw fa-tachometer-alt'></i> <span>Dashboard</span></a></li>");%>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">
@@ -244,7 +243,7 @@
 											out.print("<td>"+rs3.getString(14)+"</td>");
 											out.print("<td>"+rs3.getString(11)+"<br>"+rs3.getString(12)+"<br>"+rs3.getString(18)+"</td>");
 											out.print("<td>");
-											out.print("<form action='../uploadMaterial?type=apti&cid="+rs3.getInt(1)+"' method='post' enctype='multipart/form-data'>");
+											out.print("<form action='../uploadMaterial?type=apti&cid="+rs3.getInt(1)+"&ctid="+rs3.getInt(5)+"' method='post' enctype='multipart/form-data'>");
 											out.print("<div class='col-sm-2'>");
 											out.print("<input type='file' id='inputGroupFile02' name='image' multiple></div>");
 											out.print("<div class='col-sm-2'>");
@@ -252,7 +251,7 @@
 											out.print("</form>");
 											out.print("</td>");
 											out.print("<td>");
-											out.print("<form action='../uploadMaterial?type=verbal&cid="+rs3.getInt(1)+"' method='post' enctype='multipart/form-data'");
+											out.print("<form action='../uploadMaterial?type=verbal&cid="+rs3.getInt(1)+"&ctid="+rs3.getInt(5)+"' method='post' enctype='multipart/form-data'");
 											out.print("<div class='col-sm-2'>");
 											out.print("<input type='file' id='inputGroupFile02' name='image' multiple></div>");
 											out.print("<div class='col-sm-2'>");
@@ -260,7 +259,7 @@
 											out.print("</form>");
 											out.print("</td>");
 											out.print("<td>");
-											out.print("<form action='../uploadMaterial?type=tech&cid="+rs3.getInt(1)+"' method='post' enctype='multipart/form-data'");
+											out.print("<form action='../uploadMaterial?type=tech&cid="+rs3.getInt(1)+"&ctid="+rs3.getInt(5)+"' method='post' enctype='multipart/form-data'");
 											out.print("<div class='col-sm-2'>");
 											out.print("<input type='file' id='inputGroupFile02' name='image' multiple></div>");
 											out.print("<div class='col-sm-2'>");

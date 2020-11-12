@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String uname = request.getParameter("uname");
 		String pass = request.getParameter("pass");
-		String check = request.getParameter("check");
+		//String check = request.getParameter("check");
 		//System.out.println(check);
 		HttpSession session2 = request.getSession(); 
 		String loginAs = session2.getAttribute("loginAs").toString();

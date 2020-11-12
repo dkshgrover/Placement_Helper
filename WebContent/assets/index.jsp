@@ -74,27 +74,27 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 						Us</a>
 					<%
 						if ((session.getAttribute("uname") == null)) {
-						out.print("<a class='nav-text' class='nav-link' href='../chooseUser.jsp'>Login/Register</a>");
-					} else {
-						ResultSet rs = (ResultSet) session.getAttribute("resultSet");
-						if (rs.getString(33).equals("pending")) {
-							session.removeAttribute("uname");
-							session.removeAttribute("resultSet");
-							response.sendRedirect("../register.jsp?loginAs=student&status=Request not accepted yet**");
-						}else if(rs.getString(33).equals("accepted") && rs.getString(2) == null){
-							response.sendRedirect("../iPortfolio/form.jsp");
+							out.print("<a class='nav-text' class='nav-link' href='../chooseUser.jsp'>Login/Register</a>");
 						} else {
-							out.print("<div class='dropdown'>");
-							out.print(
-							"<button class='btn btn-primary dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"
-									+ rs.getString(2) + "</button>");
-							out.print("<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>");
-							out.print("<a class='dropdown-item' href='../iPortfolio/index.jsp'>Dashboard</a>");
-							out.print("<a style='cursor: pointer;' class='dropdown-item' data-toggle='modal' data-target='#exampleModal'>Change Password</a>");
-							out.print("<a class='dropdown-item' href='../logoutServlet?as=student'>Log-Out</a>");
-							out.print("</div>");
-							out.print("</div>");
-						}
+							ResultSet rs = (ResultSet) session.getAttribute("resultSet");
+							if (rs.getString(33).equals("pending")) {
+								session.removeAttribute("uname");
+								session.removeAttribute("resultSet");
+								response.sendRedirect("../register.jsp?loginAs=student&status=Request not accepted yet**");
+							}else if(rs.getString(33).equals("accepted") && rs.getString(2) == null){
+								response.sendRedirect("../iPortfolio/form.jsp");
+							} else {
+								out.print("<div class='dropdown'>");
+								out.print(
+								"<button class='btn btn-primary dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"
+										+ rs.getString(2) + "</button>");
+								out.print("<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>");
+								out.print("<a class='dropdown-item' href='../iPortfolio/index.jsp'>Dashboard</a>");
+								out.print("<a style='cursor: pointer;' class='dropdown-item' data-toggle='modal' data-target='#exampleModal'>Change Password</a>");
+								out.print("<a class='dropdown-item' href='../logoutServlet?as=student'>Log-Out</a>");
+								out.print("</div>");
+								out.print("</div>");
+							}
 					}
 					%>
 				</div>

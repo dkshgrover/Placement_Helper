@@ -76,12 +76,12 @@
 	<div class="container">
 	<div class="row">
 	<div class="col-sm-6 mt-5">
-	<button type="button" onclick='document.location="register.jsp?loginAs=student"' class="btn" style="margin-top:25%;margin-left:25%;margin-bottom:25%;"><img src="assets/img/student.jpg" class="imgdg" width=225px height=250px></button>
-		<h4 class="text-center" style="margin-top:-18%;">STUDENT</h4>
+	<button type="button" onclick='document.location="register.jsp?loginAs=student"' class="btn" style="margin-top:20%;margin-left:25%;margin-bottom:25%;"><img src="assets/img/student.jpg" class="imgdg" width=225px height=250px></button>
+		<h4 class="text-center" style="margin-top:-22%;margin-left:-2%;">STUDENT</h4>
 	</div>
 	<div class="col-sm-6 mt-5">
-	<button type="button" onclick='document.location="register.jsp?loginAs=college_administrator"' class="btn" style="margin-top:25%;margin-left:25%;margin-bottom:25%;"><img src="assets/img/college_admin1.jpg" class="imgdg" width=225px height=250px></button>
-     	<h4 class="text-center" style="margin-top:-18%;">COLLEGE ADMINISTRATOR</h4>
+	<button type="button" onclick='document.location="register.jsp?loginAs=college_administrator"' class="btn" style="margin-top:20%;margin-left:25%;margin-bottom:25%;"><img src="assets/img/college_admin1.jpg" class="imgdg" width=225px height=250px></button>
+     	<h4 class="text-center" style="margin-top:-22%;">COLLEGE ADMINISTRATOR</h4>
 	</div>
 	</div>
      	

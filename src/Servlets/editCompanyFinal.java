@@ -27,14 +27,6 @@ public class editCompanyFinal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<String> fileNames = new ArrayList<String>();
-		try {
-			HttpSession session = request.getSession();
-			ResultSet rs6 = (ResultSet)session.getAttribute("resultSet6");
-			rs6 = null;
-			session.removeAttribute("resultSet6");
-		}catch(Exception e) {
-			
-		}
 		int cid = Integer.parseInt(request.getParameter("cid"));
 		String cname = request.getParameter("cname");
 		String ctype = request.getParameter("ctype");
@@ -117,7 +109,7 @@ public class editCompanyFinal extends HttpServlet {
 			int rows = st.executeUpdate();
 //			System.out.println(rows);
 			if(rows == 1) {
-				response.sendRedirect("admin/companies.jsp?updated=Company details updated**");
+				response.sendRedirect("getCompanies?type="+ctid);
 			}else {
 				response.sendRedirect("admin/companies.jsp?error=Some error occured**");
 			}

@@ -58,52 +58,57 @@ public class AddNewCompany extends HttpServlet {
 		String date = request.getParameter("date");
 		String headLoc = request.getParameter("location");
 		Collection<Part> images = request.getParts();
-		for (Part p : images) {
-			String fileName = p.getSubmittedFileName();
-			if (!(fileName == null)) {
-				fileNames.add(fileName);
-				realPath = basePath + "/" + fileName;
-				InputStream is = p.getInputStream();
-				try {
-					byte[] file = new byte[is.available()];
-					is.read(file);
-					FileOutputStream fops = new FileOutputStream(realPath);
-					fops.write(file);
-					fops.flush();
-					fops.close();
-				} catch (Exception e) {
+		if(images.size() != 17) {
+			response.sendRedirect("getCompanies?type="+ctid+"&error=Some error occured **");
+		}else {
+			for (Part p : images) {
+				String fileName = p.getSubmittedFileName();
+				if (!(fileName == null)) {
+					fileNames.add(fileName);
+					realPath = basePath + "/" + fileName;
+					InputStream is = p.getInputStream();
+					try {
+						byte[] file = new byte[is.available()];
+						is.read(file);
+						FileOutputStream fops = new FileOutputStream(realPath);
+						fops.write(file);
+						fops.flush();
+						fops.close();
+					} catch (Exception e) {
 
+					}
 				}
 			}
-		}
-		try {
-			Connection con = ConnectionProvider.provideConnection();
-			String query = "insert into companies(comp_name, type,founder,ctid,website,comp_process,no_of_req,test_platform,package,"
-					+ "contact,comp_email,comp_desc,comp_visitingDate,photo1,photo2,photo3,head_location) "
-					+ "values('"+cname+"','"+ctype+"','"+founder+"',"+ctid+",'"+website+"','"+process+"',"+noOfReq+",'"+test_platform+"','"+Package+"',"
-							+ "'"+contact+"','"+comp_email+"','"+cdescr+"','"+date+"','"+fileNames.get(0)+"','"+fileNames.get(1)+"','"+fileNames.get(2)+"','"+headLoc+"')";
-			String qry = "update college_administrator set companies=companies+1";
-			if(ctid == 1) {
-				qry = qry+" where cid=1 or cid=3 or cid=4";
-			}else if(ctid == 2) {
-				qry = qry+" where cid=2";
-			}else if(ctid == 3) {
-				qry = qry+" where cid=5";
-			}else {
-				qry = qry+" where cid=6";
+			try {
+				Connection con = ConnectionProvider.provideConnection();
+				String query = "insert into companies(comp_name, type,founder,ctid,website,comp_process,no_of_req,test_platform,package,"
+						+ "contact,comp_email,comp_desc,comp_visitingDate,photo1,photo2,photo3,head_location) "
+						+ "values('"+cname+"','"+ctype+"','"+founder+"',"+ctid+",'"+website+"','"+process+"',"+noOfReq+",'"+test_platform+"','"+Package+"',"
+								+ "'"+contact+"','"+comp_email+"','"+cdescr+"','"+date+"','"+fileNames.get(0)+"','"+fileNames.get(1)+"','"+fileNames.get(2)+"','"+headLoc+"')";
+				String qry = "update college_administrator set companies=companies+1";
+				if(ctid == 1) {
+					qry = qry+" where cid=1 or cid=3 or cid=4";
+				}else if(ctid == 2) {
+					qry = qry+" where cid=2";
+				}else if(ctid == 3) {
+					qry = qry+" where cid=5";
+				}else {
+					qry = qry+" where cid=6";
+				}
+				Statement st = con.createStatement();
+				Statement st2 = con.createStatement();
+				int rows = st.executeUpdate(query);
+				int rows2 = st2.executeUpdate(qry);
+				if(rows == 1 && rows2 != 0) {
+					response.sendRedirect("getCompanies?type="+ctid);
+				}else {
+					response.sendRedirect("admin/companies.jsp?error=Some error occured**");
+				}
+			}catch(Exception e) {
+				
 			}
-			Statement st = con.createStatement();
-			Statement st2 = con.createStatement();
-			int rows = st.executeUpdate(query);
-			int rows2 = st2.executeUpdate(qry);
-			if(rows == 1 && rows2 != 0) {
-				response.sendRedirect("admin/companies.jsp?added=Company added succesfully**");
-			}else {
-				response.sendRedirect("admin/companies.jsp?error=Some error occured**");
-			}
-		}catch(Exception e) {
-			
 		}
+		
 	}
 
 }

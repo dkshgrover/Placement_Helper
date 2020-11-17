@@ -72,6 +72,7 @@ public class studentDetails extends HttpServlet {
 		//System.out.println(perc6);
 		Part fp = request.getPart("photo");
 		InputStream is = fp.getInputStream();
+		System.out.println(is);
 		Part fp2 = request.getPart("photo2");
 		InputStream is2 = fp2.getInputStream();
 //		System.out.println(perc6);

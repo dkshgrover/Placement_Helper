@@ -63,10 +63,10 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav ml-auto">
-					<a class="nav-text ml-3" class="active" href="assets/index.jsp">Home
+					<a class="nav-text ml-3" class="active" href="assets/index.jsp" style="text-decoration:none;">Home
 						<span class="sr-only">(current)</span>
-					</a> <a class="nav-text" class="nav-link nav-text" href="about.jsp">About</a>
-					<a class="nav-text" class="nav-link" href="contact.jsp">Contact
+					</a> <a class="nav-text" class="nav-link nav-text" href="about.jsp" style="text-decoration:none;">About</a>
+					<a class="nav-text" class="nav-link" href="contact.jsp" style="text-decoration:none;">Contact
 						Us</a>
 					<%
 						if (session.getAttribute("uname") != null) {
@@ -81,7 +81,7 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 						out.print("</div>");
 						out.print("</div>");
 					} else {
-						out.print("<a class='nav-text' class='nav-link' href='chooseUser.jsp'>Login/Register</a>");
+						out.print("<a class='nav-text' class='nav-link' href='chooseUser.jsp' style='text-decoration:none;'>Login/Register</a>");
 					}
 					%>
 				</div>
@@ -375,10 +375,10 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 				</div>
 				<div class="col-sm-6 content">
 					<div class="container">
-						<a href="chooseUser.jsp"><h6 class="text-center mt-3" id="h6">Log-in</h6></a>
-						<a href="chooseUser.jsp"><h5 class="text-center" id="h5">Register</h5></a>
-						<a href="about.jsp"><h4 class="text-center" id="h4">About-Us</h4></a>
-						<a href="contact.jsp"><h3 class="text-center" id="h3">Contact-Us</h3></a>
+						<a href="chooseUser.jsp" style="text-decoration:none;"><h6 class="text-center mt-3" id="h6">Log-in</h6></a>
+						<a href="chooseUser.jsp" style="text-decoration:none;"><h5 class="text-center" id="h5">Register</h5></a>
+						<a href="about.jsp" style="text-decoration:none;"><h4 class="text-center" id="h4">About-Us</h4></a>
+						<a href="contact.jsp" style="text-decoration:none;"><h3 class="text-center" id="h3">Contact-Us</h3></a>
 						<hr class="above-hr">
 						<div class="text-center text-md-center">
 							<ul class="list-unstyled list-inline">

@@ -138,9 +138,9 @@ if (pdescr2 != null) {
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav ml-auto">
 					<a class="nav-text ml-3" class="nav-link"
-						href="../assets/index.jsp">Home </a> <a class="nav-text"
-						class="nav-link nav-text" href="../about.jsp">About</a> <a
-						class="nav-text" class="nav-link" href="../contact.jsp">Contact
+						href="../assets/index.jsp" style="text-decoration:none;">Home </a> <a class="nav-text"
+						class="nav-link nav-text" href="../about.jsp" style="text-decoration:none;">About</a> <a
+						class="nav-text" class="nav-link" href="../contact.jsp" style="text-decoration:none;">Contact
 						Us</a>
 
 					<div class="dropdown">

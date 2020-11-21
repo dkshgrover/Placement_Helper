@@ -9,7 +9,7 @@ response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 <%
 	String[] pdescr1 = null;
-	String[] pdescr_2 = null;
+String[] pdescr_2 = null;
 if (session.getAttribute("uname") == null) {
 	request.getRequestDispatcher("../servlet1?loginFirst=You are not logged in**").forward(request, response);
 }
@@ -79,7 +79,8 @@ if (pdescr2 != null) {
 	margin-top: -17px;
 	width: 100%;
 	height: 100vh;
-	background: url("../getImage2?email=<%=rs.getString(9)%>") black top center;
+	background: url("../getImage2?email=<%=rs.getString(9)%>") black top
+		center;
 	background-size: cover;
 }
 </style>
@@ -138,10 +139,11 @@ if (pdescr2 != null) {
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav ml-auto">
 					<a class="nav-text ml-3" class="nav-link"
-						href="../assets/index.jsp" style="text-decoration:none;">Home </a> <a class="nav-text"
-						class="nav-link nav-text" href="../about.jsp" style="text-decoration:none;">About</a> <a
-						class="nav-text" class="nav-link" href="../contact.jsp" style="text-decoration:none;">Contact
-						Us</a>
+						href="../assets/index.jsp" style="text-decoration: none;">Home
+					</a> <a class="nav-text" class="nav-link nav-text" href="../about.jsp"
+						style="text-decoration: none;">About</a> <a class="nav-text"
+						class="nav-link" href="../contact.jsp"
+						style="text-decoration: none;">Contact Us</a>
 
 					<div class="dropdown">
 						<%
@@ -178,13 +180,13 @@ if (pdescr2 != null) {
 					<div class="container formProject">
 						<form action="../addProject" method="post">
 							<div class="form-group">
-								<label for="pno">Project Number</label>
-								<select name="pno" id="pno" class="form-control" required>
+								<label for="pno">Project Number</label> <select name="pno"
+									id="pno" class="form-control" required>
 									<option selected disabled>Choose..</option>
 									<option value="1">Project 1</option>
 									<option value="2">Project 2</option>
 								</select>
-							
+
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1">Project Name</label> <input
@@ -212,8 +214,9 @@ if (pdescr2 != null) {
 
 								<input type="submit" id="sub" value="Save changes"
 									class="btn btn-primary">
-							<div id="alert" style="width: 30%;position: fixed;margin-top: 5%;"> </div>
-									
+								<div id="alert"
+									style="width: 30%; position: fixed; margin-top: 5%;"></div>
+
 							</div>
 						</form>
 					</div>
@@ -235,12 +238,12 @@ if (pdescr2 != null) {
 
 			<div class="profile">
 				<%
-					if (rs.getBlob(31) == null) {
-					out.print("<img src='assets/img/default.jpg' alt='' height=130px width=100px class='rounded-circle'>");
-				} else {
-					out.print("<img src='../getImage?email=" + rs.getString(9)
-					+ "' alt='' height=130px width=100px class='rounded-circle'>");
-				}
+					if (rs.getBlob(31) != null) {
+						out.print("<img src='../getImage?email=" + rs.getString(9)
+						+ "' alt='' height=130px width=100px class='rounded-circle'>");
+					} else {
+						out.print("<img src='assets/img/default.jpg' alt='' height=130px width=100px class='rounded-circle'>");
+					}
 				out.print("<h1 class='text-light'><a href='index.jsp'>" + rs.getString(2) + "</a></h1>");
 				%>
 				<div class="social-links mt-3 text-center">
@@ -341,7 +344,8 @@ if (pdescr2 != null) {
 									<li><i class="icofont-rounded-right"></i> <strong>Email
 											Id: </strong> <%=rs.getString(9)%></li>
 									<li><i class="icofont-rounded-right"></i> <strong>Github
-											Profile: </strong><a href="<%=rs.getString(5)%>" target="_blank" style="color:black;"><%=rs.getString(5)%></a></li>
+											Profile: </strong><a href="<%=rs.getString(5)%>" target="_blank"
+										style="color: black;"><%=rs.getString(5)%></a></li>
 								</ul>
 							</div>
 						</div>

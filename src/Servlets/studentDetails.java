@@ -72,7 +72,6 @@ public class studentDetails extends HttpServlet {
 		//System.out.println(perc6);
 		Part fp = request.getPart("photo");
 		InputStream is = fp.getInputStream();
-		System.out.println(is);
 		Part fp2 = request.getPart("photo2");
 		InputStream is2 = fp2.getInputStream();
 //		System.out.println(perc6);
@@ -92,7 +91,13 @@ public class studentDetails extends HttpServlet {
 //		System.out.println(clgname);
 //		System.out.println(avgmarks);
 		try {
-			String query = "update students set s_name=?,contact=?,dob=?,github_profile=?,temp_address=?,perm_address=?,scl_leaving=?,scl_name=?,marks=?,clg_passingY=?,degree=?,stream=?,clg_name=?,sgpa=?,skill1=?,perc1=?,skill2=?,perc2=?,skill3=?,perc3=?,skill4=?,perc4=?,skill5=?,perc5=?,skill6=?,perc6=?,s_photo=?,s_photoBack=? where s_email=?";
+			String query = "";
+			String a = "";
+			if(fp.getSubmittedFileName().equals(a)) {
+				query = "update students set s_name=?,contact=?,dob=?,github_profile=?,temp_address=?,perm_address=?,scl_leaving=?,scl_name=?,marks=?,clg_passingY=?,degree=?,stream=?,clg_name=?,sgpa=?,skill1=?,perc1=?,skill2=?,perc2=?,skill3=?,perc3=?,skill4=?,perc4=?,skill5=?,perc5=?,skill6=?,perc6=?,s_photoBack=? where s_email=?";
+			}else {
+				query = "update students set s_name=?,contact=?,dob=?,github_profile=?,temp_address=?,perm_address=?,scl_leaving=?,scl_name=?,marks=?,clg_passingY=?,degree=?,stream=?,clg_name=?,sgpa=?,skill1=?,perc1=?,skill2=?,perc2=?,skill3=?,perc3=?,skill4=?,perc4=?,skill5=?,perc5=?,skill6=?,perc6=?,s_photo=?,s_photoBack=? where s_email=?";
+			}
 			Connection con = ConnectionProvider.provideConnection();
 			PreparedStatement st = con.prepareStatement(query);
 			st.setString(1, s_name);
@@ -121,9 +126,16 @@ public class studentDetails extends HttpServlet {
 			st.setInt(24, perc5);
 			st.setString(25, skill6);
 			st.setInt(26, perc6);
-			st.setBlob(27, is);
-			st.setBlob(28, is2);
-			st.setString(29, uname);
+//			System.out.println("filename="+fp.getSubmittedFileName());
+			if(fp.getSubmittedFileName().equals(a)) {
+				st.setBlob(27, is2);
+				st.setString(28, uname);
+			}
+			else {
+				st.setBlob(27, is);
+				st.setBlob(28, is2);
+				st.setString(29, uname);
+			}
 			int rows = st.executeUpdate();
 			//System.out.println(rows);
 			if(rows == 1) {

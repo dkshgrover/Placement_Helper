@@ -8,5 +8,5 @@ ENVIRONMENT - Eclipse IDE for EE 2020-03/Tomcat server 9.0/MySQL Database.
 TECHNOLOGIES - JAVA/JSP/Servlets/MySQL/HTML/CSS/Javascript/Jquery.
 
 How to run?
-First of all open placement_helper.sql file inside main folder, copy and paste the entire code inside sql editor at your localhost.
+First of all open placement_helper.sql file inside main folder, copy and paste the entire code inside sql editor at your localhost. Don't forget to change username and password of your localhost inside ConnectionProvider file inside DBConnection package.
 Open project in eclipse IDE , go to webContent/assets folder and run index file on server and you go for it.
